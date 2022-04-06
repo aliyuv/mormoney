@@ -22,6 +22,7 @@ export default {
 }
 .content{
   //把所有的高度给到content
+  border: 1px solid blue;
   flex-grow: 1;
   overflow: auto;
 }
