@@ -8,6 +8,9 @@
 </template>
 
 <script lang="ts">
+import x from '@/assets/icons/money.svg';
+
+console.log(x);
 export default {
   name: "LayOut"
 };
