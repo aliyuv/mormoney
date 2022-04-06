@@ -4,9 +4,10 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import Nav from "@/components/Nav.vue";
-
+import LayOut from "@/components/LayOut.vue";
 Vue.config.productionTip = false;
 Vue.component("Nav", Nav);
+Vue.component("LayOut", LayOut);
 new Vue({
     router,
     store,
