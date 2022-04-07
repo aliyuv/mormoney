@@ -1,6 +1,6 @@
 <template>
-  <div class="nav-wrapper">
-    <div class="content">
+  <div class="layout-wrapper" :class="classPrefix && `${classPrefix}-wrapper`">
+    <div class="content" :class="classPrefix && `${classPrefix}-content`   ">
       <slot/>
     </div>
     <Nav/>
@@ -9,21 +9,19 @@
 
 <script lang="ts">
 export default {
-  name: "LayOut"
+  props: ['classPrefix'],
+  name: 'Layout'
 };
 </script>
 
 <style lang="scss" scoped>
-.nav-wrapper {
-  border: 1px solid green;
+.layout-wrapper {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
-.content{
-  //把所有的高度给到content
-  border: 1px solid blue;
-  flex-grow: 1;
+.content {
   overflow: auto;
+  flex-grow: 1;
 }
 </style>
