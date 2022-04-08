@@ -32,6 +32,7 @@
 </script>
 
 <style lang="scss" scoped>
+@use "sass:math";
   .tags {
     font-size: 14px;
     padding: 16px;
@@ -47,7 +48,7 @@
         $h: 24px;
         height: $h;
         line-height: $h;
-        border-radius: $h/2;
+        border-radius: math.div($h, 2);
         padding: 0 16px;
         margin-right: 12px;
         margin-top: 4px;
