@@ -1,9 +1,7 @@
 <template>
-  <div>
     <svg class="icon">
       <use :href="'#'+name"></use>
     </svg>
-  </div>
 </template>
 
 <script lang="ts">
