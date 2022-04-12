@@ -1,9 +1,10 @@
 <template>
   <LayOut class-prefix="layout">
+    {{record}}
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
     <Types :value.sync="record.type"/>
     <FormItem @update:value="onUpdateNotes" fiel-name="备注" placeholder="请输入备注信息"/>
-    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+    <Tags :data-source.sync="tags" @update:value="onUpdateTags" />
   </LayOut>
 </template>
 
