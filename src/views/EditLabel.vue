@@ -10,11 +10,11 @@
           fiel-name="标签名"
           placeholder="请输入标签名"
           :value="tag.name"
-          @update:value = "update"
+          @update:value="update"
       />
     </div>
     <div class="button-wrapper">
-     <Button @click="remove">删除标签</Button>
+      <Button @click="remove">删除标签</Button>
     </div>
   </LayOut>
 </template>
@@ -30,7 +30,8 @@ import Button from "@/components/Button.vue";
   components: {Button, FormItem}
 })
 export default class EditLabel extends Vue {
-  tag?: {id: string,name: string} = undefined;
+  tag?: { id: string, name: string } = undefined;
+
   created() {
     const id = this.$route.params.id;
     tagListModel.fetch();
@@ -42,17 +43,19 @@ export default class EditLabel extends Vue {
       this.$router.replace("/404");
     }
   }
-  update(name: string){
-    if (this.tag){
-      tagListModel.update(this.tag.id,name);
+
+  update(name: string) {
+    if (this.tag) {
+      tagListModel.update(this.tag.id, name);
     }
   }
-  remove(){
-    if (this.tag){
-      if (tagListModel.remove(this.tag.id)){
+
+  remove() {
+    if (this.tag) {
+      if (tagListModel.remove(this.tag.id)) {
         this.$router.back();
-      }else {
-        window.alert('删除失败');
+      } else {
+        window.alert("删除失败");
       }
     }
   }
@@ -68,21 +71,26 @@ export default class EditLabel extends Vue {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  > .title{
+
+  > .title {
   }
-  > .leftIcon{
+
+  > .leftIcon {
     width: 24px;
     height: 24px;
   }
-  > .rightIcon{
+
+  > .rightIcon {
     width: 24px;
     height: 24px;
   }
 }
-.form-wrapper{
+
+.form-wrapper {
   background: white;
   margin-top: 8px;
 }
+
 .button-wrapper {
   text-align: center;
   padding: 16px;
