@@ -10,10 +10,11 @@
           fiel-name="标签名"
           placeholder="请输入标签名"
           :value="tag.name"
+          @update:value = "update"
       />
     </div>
     <div class="button-wrapper">
-     <Button>删除标签</Button>
+     <Button @click="remove">删除标签</Button>
     </div>
   </LayOut>
 </template>
@@ -37,9 +38,22 @@ export default class EditLabel extends Vue {
     const tag = tags.filter(t => t.id === id)[0];
     if (tag) {
       this.tag = tag;
-      console.log(tag);
     } else {
       this.$router.replace("/404");
+    }
+  }
+  update(name: string){
+    if (this.tag){
+      tagListModel.update(this.tag.id,name);
+    }
+  }
+  remove(){
+    if (this.tag){
+      if (tagListModel.remove(this.tag.id)){
+        this.$router.back();
+      }else {
+        window.alert('删除失败');
+      }
     }
   }
 }
