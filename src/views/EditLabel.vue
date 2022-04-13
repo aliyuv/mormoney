@@ -6,7 +6,11 @@
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
-      <FormItem fiel-name="标签名" placeholder="请输入标签名"/>
+      <FormItem
+          fiel-name="标签名"
+          placeholder="请输入标签名"
+          :value="tag.name"
+      />
     </div>
     <div class="button-wrapper">
      <Button>删除标签</Button>
@@ -33,6 +37,7 @@ export default class EditLabel extends Vue {
     const tag = tags.filter(t => t.id === id)[0];
     if (tag) {
       this.tag = tag;
+      console.log(tag);
     } else {
       this.$router.replace("/404");
     }
