@@ -3,7 +3,7 @@
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
     <Types :value.sync="record.type"/>
     <FormItem @update:value="onUpdateNotes" fiel-name="备注" placeholder="请输入备注信息"/>
-    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+    <Tags />
   </LayOut>
 </template>
 
@@ -24,11 +24,6 @@ export default class Money extends Vue {
   record: RecordItem = {
     tags: [], notes: "", type: "-", amount: 0
   };
-
-  onUpdateTags(value: string[]) {
-    this.record.tags = value;
-  }
-
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }

@@ -4,10 +4,9 @@
       <button @click="create">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag.id"
-          @click="toggle(tag)"
-          :class="{selected:selectedTags.indexOf(tag)>=0}">
-           {{tag.name}}
+      <li v-for="tag in tagList" :key="tag.id"
+          :class="{selected: selectedTags.indexOf(tag)>=0}"
+          @click="toggle(tag)">{{tag.name}}
       </li>
     </ul>
   </div>
@@ -15,68 +14,59 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import {Component, Prop} from "vue-property-decorator";
-
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+import store from '@/store/index2';
 @Component
 export default class Tags extends Vue {
-  @Prop()  dataSource: string[] | undefined;
+  tagList = store.fetchTags();
   selectedTags: string[] = [];
-  toggle(tag:string){
+  toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
-    if (index >= 0){
-      this.selectedTags.splice(index,1);
-    }else {
-      this.selectedTags.push(tag)
+    if (index >= 0) {
+      this.selectedTags.splice(index, 1);
+    } else {
+      this.selectedTags.push(tag);
     }
-    this.$emit('update:value',this.selectedTags);
+    this.$emit('update:value', this.selectedTags);
   }
-  create(){
-    const  name = window.prompt('请输入标签名');
-    if (name === ''){
-        window.alert('标签名不能为空');
-    }else if (this.dataSource) {
-         console.log(this.dataSource);
-         this.$emit('update:dataSource',[...this.dataSource,name]);
-    }
+  create() {
+    const name = window.prompt('请输入标签名');
+    if (!name) { return window.alert('标签名不能为空'); }
+    store.createTag(name);
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@use "sass:math";
-
 .tags {
+  background: white;
   font-size: 14px;
   padding: 16px;
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
-  background: white;
   > .current {
     display: flex;
     flex-wrap: wrap;
-
     > li {
-      $bg:#d9d9d9;
+      $bg: #d9d9d9;
       background: $bg;
       $h: 24px;
       height: $h;
       line-height: $h;
-      border-radius: math.div($h, 2);
+      border-radius: $h/2;
       padding: 0 16px;
       margin-right: 12px;
       margin-top: 4px;
-      &.selected{
-        background: darken($bg,50%);
+      &.selected {
+        background: darken($bg, 50%);
         color: white;
       }
     }
   }
-
   > .new {
     padding-top: 16px;
-
     button {
       background: transparent;
       border: none;
@@ -86,5 +76,4 @@ export default class Tags extends Vue {
     }
   }
 }
-
 </style>
