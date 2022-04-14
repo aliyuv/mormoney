@@ -15,7 +15,7 @@ Vue.component("Icon", Icon);
 
 window.tagList = tagListModel.fetch();
 
-window.createTag = (name: string) =>{
+window.createTag = (name: string) => {
     if (name) {
         const message = tagListModel.create(name);
         if (message === "duplicated") {
@@ -26,6 +26,18 @@ window.createTag = (name: string) =>{
     } else if (name === "") {
         window.alert("请输入标签名");
     }
+};
+
+window.removeTag = (id: string) => {
+    return tagListModel.remove(id);
+};
+
+window.updateTag = (id: string, name: string) => {
+    return tagListModel.update(id, name);
+};
+
+window.findTag = (id: string) =>{
+    return window.tagList.filter(t => t.id === id)[0];
 }
 
 
