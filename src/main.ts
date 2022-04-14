@@ -7,12 +7,19 @@ import Nav from "@/components/Nav.vue";
 import LayOut from "@/components/LayOut.vue";
 import Icon from "@/components/Icon.vue";
 import tagListModel from "@/models/tagListModel";
+import recordListModel from "@/models/recordListModels";
+
 
 Vue.config.productionTip = false;
 Vue.component("Nav", Nav);
 Vue.component("LayOut", LayOut);
 Vue.component("Icon", Icon);
 
+// record store
+window.recordList = recordListModel.fetch();
+window.createRecord = (record: RecordItem)=> recordListModel.create(record);
+
+// tag store
 window.tagList = tagListModel.fetch();
 
 window.createTag = (name: string) => {
