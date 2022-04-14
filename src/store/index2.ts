@@ -1,23 +1,23 @@
-//record store
-import recordListModel from "@/models/recordListModels";
-import tagListModel from "@/models/tagListModel";
+import recordListModel from '@/models/recordListModels';
+import tagListModel from '@/models/tagListModel';
 
 const store = {
+    // record store
     recordList: recordListModel.fetch(),
     createRecord: (record: RecordItem) => recordListModel.create(record),
+    // 2 严重依赖 window
 
-    //tag store
+    // tag store
     tagList: tagListModel.fetch(),
+    findTag(id: string) {
+        return this.tagList.filter(t => t.id === id)[0];
+    },
     createTag: (name: string) => {
-        if (name) {
-            const message = tagListModel.create(name);
-            if (message === "duplicated") {
-                window.alert("标签名重复了");
-            } else if (message === "success") {
-                window.alert("添加成功");
-            }
-        } else if (name === "") {
-            window.alert("请输入标签名");
+        const message = tagListModel.create(name);
+        if (message === 'duplicated') {
+            window.alert('标签名重复了');
+        } else if (message === 'success') {
+            window.alert('添加成功');
         }
     },
     removeTag: (id: string) => {
@@ -25,9 +25,8 @@ const store = {
     },
     updateTag: (id: string, name: string) => {
         return tagListModel.update(id, name);
-    },
-    findTag(id: string) {
-        return this.tagList.filter(t => t.id === id)[0];
     }
+
 };
+
 export default store;
