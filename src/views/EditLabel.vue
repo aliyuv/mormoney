@@ -9,7 +9,7 @@
       <FormItem
           fiel-name="标签名"
           placeholder="请输入标签名"
-          :value="tag.name"
+          :value="CurrentTag.name"
           @update:value="update"
       />
     </div>
@@ -29,40 +29,34 @@ import Button from "@/components/Button.vue";
   components: {Button, FormItem}
 })
 export default class EditLabel extends Vue {
-  get tag() {
+  get CurrentTag() {
     return this.$store.state.currentTag;
   }
 
   created() {
     const id = this.$route.params.id;
+    //重新获取下tags 解决刷新后404的bug
+    this.$store.commit("fetchTags");
     this.$store.commit("setCurrentTag", id);
-    if (!this.tag) {
+    if (!this.CurrentTag) {
       this.$router.replace("/404");
     }
   }
 
   update(name: string) {
-    if (this.tag) {
-      //TODO
-      // store.updateTag(this.tag.id, name);
+    if (this.CurrentTag) {
+      this.$store.commit("updateTag", {id: this.CurrentTag.id, name});
     }
   }
 
   remove() {
-    if (this.tag) {
-      return;
-      //TODO
-      // if (store.removeTag(this.tag.id)) {
-      //   this.$router.back();
-      // } else {
-      //   window.alert("删除失败");
-      // }
+    if (this.CurrentTag) {
+      this.$store.commit("removeTag", this.CurrentTag.id);
     }
   }
 
   goBack() {
     this.$router.back();
-    console.log(110);
   }
 }
 </script>

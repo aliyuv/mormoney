@@ -1,11 +1,11 @@
-import createId from '@/lib/createId';
+import createId from "@/lib/createId";
 
-const localStorageKeyName = 'tagList';
+const localStorageKeyName = "tagList";
 
 const tagStore = {
     tagList: [] as Tag[],
     fetchTags() {
-        this.tagList = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]');
+        this.tagList = JSON.parse(window.localStorage.getItem(localStorageKeyName) || "[]");
         return this.tagList;
     },
     findTag(id: string) {
@@ -14,14 +14,14 @@ const tagStore = {
     createTag(name: string) {
         const names = this.tagList.map(item => item.name);
         if (names.indexOf(name) >= 0) {
-            window.alert('标签名重复了');
-            return 'duplicated';
+            window.alert("标签名重复了");
+            return "duplicated";
         }
         const id = createId().toString();
         this.tagList.push({id, name: name});
         this.saveTags();
-        window.alert('添加成功');
-        return 'success';
+        window.alert("添加成功");
+        return "success";
     },
     removeTag(id: string) {
         let index = -1;
@@ -40,15 +40,15 @@ const tagStore = {
         if (idList.indexOf(id) >= 0) {
             const names = this.tagList.map(item => item.name);
             if (names.indexOf(name) >= 0) {
-                return 'duplicated';
+                return "duplicated";
             } else {
                 const tag = this.tagList.filter(item => item.id === id)[0];
                 tag.name = name;
                 this.saveTags();
-                return 'success';
+                return "success";
             }
         } else {
-            return 'not found';
+            return "not found";
         }
     },
     saveTags() {
