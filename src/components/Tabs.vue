@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ul class="tabs">
+    <ul :class="{[classPrefix+'-tabs']:classPrefix}" class="tabs">
       <li v-for="item in dataSource" :key="item.value" @click="select(item)"
-          :class="liClass(item)">
+          :class="liClass(item)" class="tabs-item">
         {{
           item.text
         }}
@@ -14,10 +14,12 @@
 <script lang="ts">
 import Vue from "vue";
 import {Component, Prop} from "vue-property-decorator";
+import FormItem from "@/components/Money/FormItem.vue";
 
 type DataSourceItem = { text: string, value: string };
-
-@Component
+@Component({
+  components: {FormItem}
+})
 export default class Tabs extends Vue {
   @Prop({required: true, type: Array}) dataSource!: DataSourceItem[];
   @Prop(String) readonly value!: string;
@@ -43,7 +45,7 @@ export default class Tabs extends Vue {
   text-align: center;
   font-size: 24px;
 
-  > li {
+  &-item {
     width: 50%;
     height: 64px;
     display: flex;
