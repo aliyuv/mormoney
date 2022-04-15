@@ -7,7 +7,7 @@
           :to="`/labels/edit/${tag.id}`"
           class="tag"
       >
-        <span>{{ tag.name }} @@@</span>
+        <span>{{ tag.name }}</span>
         <Icon name="right"/>
       </router-link>
     </div>
@@ -18,22 +18,24 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import Button from "@/components/Button.vue";
+import {mixins} from "vue-class-component";
+import {TagHelper} from "@/mixins/TagHelper";
+
+const tagHelper: any = require("@/mixins/TagHelper"); // eslint-disable-line
 @Component({
-  components: {Button}
+  components: {Button},
+  computed: {
+    tags() {
+      return this.$store.state.tagList;
+    },
+
+  }
 })
-export default class Labels extends Vue {
-  //TODO
-  // tags = store.tagList; // 知识点1
-  tags = [];
-  createTag() {
-    const name = window.prompt("请输入标签名");
-    if (name) {
-      //TODO
-      // store.createTag(name);
-    }
+export default class Labels extends mixins(TagHelper) {
+  beforeCreate() {
+    this.$store.commit("fetchTags");
   }
 }
 </script>
