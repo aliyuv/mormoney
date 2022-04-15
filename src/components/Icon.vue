@@ -1,7 +1,7 @@
 <template>
-    <svg class="icon">
-      <use :href="'#'+name"></use>
-    </svg>
+  <svg class="icon" @click="$emit('click',$event)">
+    <use :href="'#'+name"></use>
+  </svg>
 </template>
 
 <script lang="ts">
@@ -13,13 +13,14 @@ try {
 }
 export default {
   name: "Icon",
-  props:['name']
+  props: ["name"]
 };
 </script>
 
 <style lang="scss" scoped>
 .icon {
-  width: 1em; height: 1em;
+  width: 1em;
+  height: 1em;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;

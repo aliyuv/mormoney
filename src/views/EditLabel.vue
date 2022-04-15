@@ -1,7 +1,7 @@
 <template>
   <LayOut>
     <div class="navBar">
-      <Icon class="leftIcon" name="left"/>
+      <Icon class="leftIcon" name="left" @click="goBack"/>
       <span>编辑标签</span>
       <span class="rightIcon"></span>
     </div>
@@ -24,18 +24,20 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import FormItem from "@/components/Money/FormItem.vue";
 import Button from "@/components/Button.vue";
+
 @Component({
   components: {Button, FormItem}
 })
 export default class EditLabel extends Vue {
-  get tag(){
+  get tag() {
     return this.$store.state.currentTag;
   }
+
   created() {
     const id = this.$route.params.id;
-    this.$store.commit('setCurrentTag',id);
-    if (!this.tag){
-      this.$router.replace('/404');
+    this.$store.commit("setCurrentTag", id);
+    if (!this.tag) {
+      this.$router.replace("/404");
     }
   }
 
@@ -56,6 +58,11 @@ export default class EditLabel extends Vue {
       //   window.alert("删除失败");
       // }
     }
+  }
+
+  goBack() {
+    this.$router.back();
+    console.log(110);
   }
 }
 </script>
