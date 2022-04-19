@@ -68,7 +68,7 @@ export default class Statistics extends Vue {
         .filter(r => r.type === this.type)
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
     type Result = { title: string, total?: number, items: RecordItem[] }[]
-    const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
+    const result: Result = [{title: dayjs(newList[0].createdAt).format("YYYY-MM-DD"), items: [newList[0]]}];
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i];
       const last = result[result.length - 1];
@@ -78,6 +78,9 @@ export default class Statistics extends Vue {
         result.push({title: dayjs(current.createdAt).format("YYYY-MM-DD"), items: [current]});
       }
     }
+    result.forEach(group => {
+      group.total = group.items.reduce((sum, item) => sum + item.amount, 0);
+    });
     return result;
   }
 

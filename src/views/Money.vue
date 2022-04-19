@@ -1,6 +1,6 @@
 <template>
   <LayOut class-prefix="layout">
-    <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
+    <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
     <FormItem @update:value="onUpdateNotes" fiel-name="备注" placeholder="请输入备注信息"/>
     <Tags/>
@@ -25,7 +25,6 @@ export default class Money extends Vue {
     return this.$store.state.recordList;
   }
 
-
   recordTypeList = recordTypeList;
   record: RecordItem = {
     tags: [], notes: "", type: "-", amount: 0
@@ -37,10 +36,6 @@ export default class Money extends Vue {
 
   onUpdateNotes(value: string) {
     this.record.notes = value;
-  }
-
-  onUpdateAmount(value: string) {
-    this.record.amount = parseFloat(value);
   }
 
   saveRecord() {
