@@ -43,6 +43,7 @@ export default class Tags extends mixins(TagHelper) {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:math";
 .tags {
   background: white;
   font-size: 14px;
@@ -61,7 +62,7 @@ export default class Tags extends mixins(TagHelper) {
       $h: 24px;
       height: $h;
       line-height: $h;
-      border-radius: $h/2;
+      border-radius: math.div($h, 2);
       padding: 0 16px;
       margin-right: 12px;
       margin-top: 4px;

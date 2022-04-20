@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
-import store from './store';
+import store from "./store";
 import Nav from "@/components/Nav.vue";
 import LayOut from "@/components/LayOut.vue";
 import Icon from "@/components/Icon.vue";
@@ -17,3 +17,9 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount("#app");
+
+window.onload = function () {
+    setTimeout(function () {
+        window.scrollTo(0, 200);
+    }, 0);
+};

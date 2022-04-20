@@ -2,8 +2,8 @@
   <LayOut class-prefix="layout">
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
-    <FormItem @update:value="onUpdateNotes" fiel-name="备注" placeholder="请输入备注信息"/>
-    <Tags/>
+    <FormItem @update:value="onUpdateNotes" fiel-name="备注" placeholder="请输入备注信息" :value.sync="record.notes" />
+    <Tags @update:value="record.tags = $event"/>
   </LayOut>
 </template>
 
@@ -39,7 +39,14 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
+    if (!this.record.tags || this.record.tags.length === 0) {
+      return window.alert("请至少选择一个标签");
+    }
     this.$store.commit("createRecord", this.record);
+    if (this.$store.state.createRecordError === null) {
+      window.alert("已保存");
+      this.record.notes = "";
+    }
   }
 }
 </script>
