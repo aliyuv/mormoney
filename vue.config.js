@@ -1,8 +1,7 @@
 /* eslint-disable */
 const path = require('path')
 module.exports = {
-    publicPath: process.env.NODE_ENV === 'production' ? '/mormoney-website\n' +
-        'Public/' : '/',
+    publicPath: process.env.NODE_ENV === 'production' ? '/mormoney-website' : '/',
     lintOnSave: false, chainWebpack: config => {
         const dir = path.resolve(__dirname, 'src/assets/icons')
 
